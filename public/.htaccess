@@ -13,7 +13,16 @@ RewriteEngine On
 # Redirect from www subdomain to preferred domain (no-www), or otherway around as preferred
 #RewriteCond %{HTTP_HOST} !^localhost$ [NC]
 #RewriteCond %{HTTP_HOST} ^www [NC]
-#ewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
+#RewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
+
+# TEMPORARY COMING SOON LANDING PAGES FOR MORITZMEDIA AND PITONCMS
+# For moritzmedia.com → append /moritzmedia
+RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
+RewriteRule ^(.*)$ moritzmedia/$1
+
+# For pitoncms.com → append /pitoncms
+RewriteCond %{HTTP_HOST} ^pitoncms\.com$ [NC]
+RewriteRule ^(.*)$ pitoncms/$1
 
 # Check to see if the user is attempting to access a valid file, such as an image
 # or css document, if this isn't true this sends the request to index.php.
