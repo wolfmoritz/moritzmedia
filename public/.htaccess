@@ -21,15 +21,16 @@ RewriteRule ^ - [L]
 
 # TEMPORARY COMING SOON LANDING PAGES FOR MORITZMEDIA AND PITONCMS
 # For moritzmedia.com → append /moritzmedia
-RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
-RewriteRule ^(.*)$ /moritzmedia
+RewriteCond %{HTTP_HOST} ^moritzmedia\.com [NC]
+RewriteRule ^(.*)$ index.php/moritzmedia [L]
 
 # For pitoncms.com → append /pitoncms
-RewriteCond %{HTTP_HOST} ^pitoncms\.com$ [NC]
-RewriteRule ^(.*)$ /pitoncms
+RewriteCond %{HTTP_HOST} ^pitoncms\.com [NC]
+RewriteRule ^(.*)$ index.php/pitoncms [L]
 
-# Sends the request to index.php. Asset requests are screeded out above.
-RewriteRule ^ index.php [QSA,L]
+# Sends the request to index.php. Asset requests are handled above.
+#RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
+#RewriteRule ^(.*)$ index.php/$1 [QSA,L]
 
 # Caching
 <IfModule mod_expires.c>
