@@ -31,8 +31,8 @@ RewriteCond %{REQUEST_URI} !^/index\.php
 RewriteRule ^(.*)$ index.php/pitoncms [L]
 
 # Sends the request to index.php. Asset requests are handled above.
-#RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
-#RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
+RewriteRule ^(.*)$ index.php/$1 [QSA,L]
 
 # Caching
 <IfModule mod_expires.c>
