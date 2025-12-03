@@ -10,33 +10,10 @@ Options -Indexes
 
 RewriteEngine On
 
-# Redirect from www subdomain to preferred domain (no-www), or otherway around as preferred
-#RewriteCond %{HTTP_HOST} !^localhost$ [NC]
-#RewriteCond %{HTTP_HOST} ^www [NC]
-#ewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
-
-# If the request is for an asset file, then stop
-RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|css|js|map|ico|txt|svg|woff)$ [NC]
-RewriteRule ^ - [L]
-
-# TEMPORARY
-# 1) moritzmedia.com -> redirect to /moritzmedia if no path or query
-# RewriteCond %{HTTP_HOST} ^(www\.)?moritzmedia\.com$ [NC]
-# RewriteCond %{REQUEST_URI} ^/?$         # only bare /
-# RewriteCond %{QUERY_STRING} ^$          # no query string
-# RewriteCond %{REQUEST_URI} !^/moritzmedia$  # avoid redirect loop
-# RewriteRule ^$ /moritzmedia [R=302,L]
-
-# # 2) pitoncms.com -> redirect to /pitoncms if no path or query
-# RewriteCond %{HTTP_HOST} ^(www\.)?pitoncms\.com$ [NC]
-# RewriteCond %{REQUEST_URI} ^/?$         # only bare /
-# RewriteCond %{QUERY_STRING} ^$          # no query string
-# RewriteCond %{REQUEST_URI} !^/pitoncms$  # avoid redirect loop
-# RewriteRule ^$ /pitoncms [R=302,L]
-
-# Pass everything to the app engine
+# Check to see if the user is attempting to access a valid file, such as an image
+# or css document, if this isn't true this sends the request to index.php.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|css|js|map|ico|txt|svg)$ [NC]
 RewriteRule ^ index.php [QSA,L]
 
 # Caching
