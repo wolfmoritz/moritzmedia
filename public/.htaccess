@@ -35,6 +35,8 @@ RewriteRule ^ - [L]
 # RewriteRule ^$ /pitoncms [R=302,L]
 
 # Pass everything to the app engine
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
 
 # Caching
