@@ -13,29 +13,12 @@ RewriteEngine On
 # Redirect from www subdomain to preferred domain (no-www), or otherway around as preferred
 #RewriteCond %{HTTP_HOST} !^localhost$ [NC]
 #RewriteCond %{HTTP_HOST} ^www [NC]
-#RewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
+#ewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
 
-# First check if this is a request for an asset file and if true, stop processing
-RewriteCond %{REQUEST_URI} \.(jpe?g|png|gif|css|js|map|ico|txt|svg|woff)$ [NC]
-RewriteRule ^ - [L]
-
-# TEMPORARY COMING SOON LANDING PAGES FOR MORITZMEDIA AND PITONCMS
-# moritzmedia.com → append /moritzmedia
-# But ignore /login and /admin*
-RewriteCond %{HTTP_HOST} ^(www\.)?moritzmedia\.com$ [NC]
-RewriteCond %{REQUEST_URI} !^/index\.php [NC]
-RewriteCond %{REQUEST_URI} !^/login [NC]
-RewriteCond %{REQUEST_URI} !^/admin [NC]
-RewriteRule ^(.*)$ moritzmedia/$1 [L]
-
-# pitoncms.com → append /pitoncms
-RewriteCond %{HTTP_HOST} ^(www\.)?pitoncms\.com$ [NC]
-RewriteCond %{REQUEST_URI} !^/index\.php [NC]
-RewriteRule ^(.*)$ pitoncms/$1 [L]
-
-# Catch-all: everything else → index.php
-RewriteCond %{REQUEST_URI} !^/index\.php [NC]
-RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+# Check to see if the user is attempting to access a valid file, such as an image
+# or css document, if this isn't true this sends the request to index.php.
+RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|css|js|map|ico|txt|svg|woff)$ [NC]
+RewriteRule ^ index.php [QSA,L]
 
 # Caching
 <IfModule mod_expires.c>
