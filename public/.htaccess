@@ -15,19 +15,20 @@ RewriteEngine On
 #RewriteCond %{HTTP_HOST} ^www [NC]
 #RewriteRule ^(.*)$ https://<domain.topLevelDomain>/$1 [L,R=301]
 
+# First check if this is a request for an asset file and if true, stop processing
+RewriteCond %{REQUEST_URI} \.(jpe?g|png|gif|css|js|map|ico|txt|svg|woff)$ [NC]
+RewriteRule ^ - [L]
+
 # TEMPORARY COMING SOON LANDING PAGES FOR MORITZMEDIA AND PITONCMS
 # For moritzmedia.com → append /moritzmedia
 RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
-RewriteRule ^(.*)$ moritzmedia/$1
+RewriteRule ^(.*)$ /moritzmedia
 
 # For pitoncms.com → append /pitoncms
 RewriteCond %{HTTP_HOST} ^pitoncms\.com$ [NC]
-RewriteRule ^(.*)$ pitoncms/$1
+RewriteRule ^(.*)$ /pitoncms
 
-# Check to see if the user is attempting to access a valid file, such as an image
-# or css document, if this isn't true this sends the request to index.php.
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|css|js|map|ico|txt|svg)$ [NC]
+# Sends the request to index.php. Asset requests are screeded out above.
 RewriteRule ^ index.php [QSA,L]
 
 # Caching
