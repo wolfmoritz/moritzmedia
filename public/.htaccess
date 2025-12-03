@@ -24,12 +24,14 @@ RewriteRule ^ - [L]
 RewriteCond %{HTTP_HOST} ^(www\.)?moritzmedia\.com$ [NC]
 RewriteCond %{REQUEST_URI} ^/?$         # only bare /
 RewriteCond %{QUERY_STRING} ^$          # no query string
+RewriteCond %{REQUEST_URI} !^/moritzmedia$  # avoid redirect loop
 RewriteRule ^$ /moritzmedia [R=302,L]
 
 # 2) pitoncms.com -> redirect to /pitoncms if no path or query
 RewriteCond %{HTTP_HOST} ^(www\.)?pitoncms\.com$ [NC]
 RewriteCond %{REQUEST_URI} ^/?$         # only bare /
 RewriteCond %{QUERY_STRING} ^$          # no query string
+RewriteCond %{REQUEST_URI} !^/pitoncms$  # avoid redirect loop
 RewriteRule ^$ /pitoncms [R=302,L]
 
 # Pass everything to the app engine
