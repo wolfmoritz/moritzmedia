@@ -20,18 +20,21 @@ RewriteCond %{REQUEST_URI} \.(jpe?g|png|gif|css|js|map|ico|txt|svg|woff)$ [NC]
 RewriteRule ^ - [L]
 
 # TEMPORARY COMING SOON LANDING PAGES FOR MORITZMEDIA AND PITONCMS
-# For moritzmedia.com → append /moritzmedia
-RewriteCond %{HTTP_HOST} ^moritzmedia\.com [NC]
-RewriteCond %{REQUEST_URI} !^/index\.php
-RewriteRule ^(.*)$ index.php/moritzmedia [L]
+# moritzmedia.com → append /moritzmedia
+# But ignore /login and /admin*
+RewriteCond %{HTTP_HOST} ^(www\.)?moritzmedia\.com$ [NC]
+RewriteCond %{REQUEST_URI} !^/index\.php [NC]
+RewriteCond %{REQUEST_URI} !^/login [NC]
+RewriteCond %{REQUEST_URI} !^/admin [NC]
+RewriteRule ^(.*)$ moritzmedia/$1 [L]
 
-# For pitoncms.com → append /pitoncms
-RewriteCond %{HTTP_HOST} ^pitoncms\.com [NC]
-RewriteCond %{REQUEST_URI} !^/index\.php
-RewriteRule ^(.*)$ index.php/pitoncms [L]
+# pitoncms.com → append /pitoncms
+RewriteCond %{HTTP_HOST} ^(www\.)?pitoncms\.com$ [NC]
+RewriteCond %{REQUEST_URI} !^/index\.php [NC]
+RewriteRule ^(.*)$ pitoncms/$1 [L]
 
-# Sends the request to index.php. Asset requests are handled above.
-RewriteCond %{HTTP_HOST} ^moritzmedia\.com$ [NC]
+# Catch-all: everything else → index.php
+RewriteCond %{REQUEST_URI} !^/index\.php [NC]
 RewriteRule ^(.*)$ index.php/$1 [QSA,L]
 
 # Caching
