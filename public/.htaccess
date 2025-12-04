@@ -10,6 +10,12 @@ Options -Indexes
 
 RewriteEngine On
 
+# pitoncms.com -> set request_uri to /pitoncms
+RewriteCond %{HTTP_HOST} ^(www\.)?pitoncms\.com$ [NC]
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteRule ^$ pitoncms [L]
+
+
 # Check to see if the user is attempting to access a valid file, such as an image
 # or css document, if this isn't true this sends the request to index.php.
 # RewriteCond %{REQUEST_FILENAME} !-f
