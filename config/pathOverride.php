@@ -40,6 +40,6 @@ if (strtolower($_SERVER['HTTP_HOST']) === 'moritzmedia.com' && $_SERVER['REQUEST
 }
 
 // Goodban Masonry
-if (strtolower($_SERVER['HTTP_HOST']) === 'http://goodbanmasonry.com') {
+if (strtolower($_SERVER['HTTP_HOST']) === 'goodbanmasonry.com') {
     $_SERVER['REQUEST_URI'] = '/goodbanmasonry';
 }
