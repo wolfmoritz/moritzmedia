@@ -1,0 +1,8 @@
+body
+{margin: 0}
+#wrapper{
+	background: url(../images/GoodbanMasonry.jpg) no-repeat;
+	height: 792px;
+	width: 1038px;
+	margin: 0 auto;
+}
