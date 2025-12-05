@@ -29,17 +29,22 @@
 
 declare(strict_types=1);
 
-// Coming soon for Piton
-if (strtolower($_SERVER['HTTP_HOST']) === 'pitoncms.com') {
-    $_SERVER['REQUEST_URI'] = '/pitoncms';
-}
-
 // Coming soon for Moritz Media (only where no path is requested)
 if (strtolower($_SERVER['HTTP_HOST']) === 'moritzmedia.com' && $_SERVER['REQUEST_URI'] === '/') {
     $_SERVER['REQUEST_URI'] = '/moritzmedia';
 }
 
+// Coming soon for Piton
+if (strtolower($_SERVER['HTTP_HOST']) === 'pitoncms.com') {
+    $_SERVER['REQUEST_URI'] = '/pitoncms';
+}
+
 // Goodban Masonry
 if (strtolower($_SERVER['HTTP_HOST']) === 'goodbanmasonry.com') {
     $_SERVER['REQUEST_URI'] = '/goodbanmasonry';
+}
+
+// Baking With Fritz
+if (strtolower($_SERVER['HTTP_HOST']) === 'bakingwithfritz.com') {
+    $_SERVER['REQUEST_URI'] = '/bakingwithfritz';
 }
